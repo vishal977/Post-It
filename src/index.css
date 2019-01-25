@@ -12,3 +12,13 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.one .two .three .four {
+  height: 450px;
+}
+
+.notes .noteswrap img {
+  height: 50px;
+  width: 70px;
+  opacity: 0.8;
+}
