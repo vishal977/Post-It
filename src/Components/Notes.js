@@ -24,7 +24,7 @@ class Notes extends React.Component {
             arr.map(arr => 
             {
             return ( 
-                <div className="card yellow lighten-2 notes center z-depth-2" key={arr.id}>
+                <div className="card yellow lighten-2 notes center z-depth-0" key={arr.id}>
                     <div className="card-image noteswrap">
                         <img className = "pinimg" src={Pin} alt="Pin"/>
                     </div>
