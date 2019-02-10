@@ -1,12 +1,11 @@
 const noteDeletor = (id) => {
     return(dispatch,getState,{getFirebase,getFirestore}) => {
-        //Async Task
         const firestore = getFirestore();
         firestore.collection('notes').doc(id).delete()
-        .then(() => {  //then block is executed after async task completes
+        .then(() => { 
         dispatch({type: 'DELETE_NOTE', id: id});
 
-        }).catch((err)=> { //Error Message
+        }).catch((err)=> {
             dispatch({type: 'ERROR_DELETING_NOTE', err})
         })
 

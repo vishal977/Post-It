@@ -14,17 +14,18 @@ class Notes extends React.Component {
     
     render(){
         const {note} = this.props;
+        const {auth} = this.props;
         var arr = [];
         for (var key in note) {
             arr.push(note[key]);
         }
-        console.log(arr.length);
         const notes = arr.length ?
         (
             arr.map(arr => 
             {
+                if(arr.email === auth.email){
             return ( 
-                <div className="card yellow lighten-2 notes center z-depth-0" key={arr.id}>
+                <div className="card yellow lighten-2 notes center" key={arr.id}>
                     <div className="card-image noteswrap">
                         <img className = "pinimg" src={Pin} alt="Pin"/>
                     </div>
@@ -41,6 +42,11 @@ class Notes extends React.Component {
                     </div>
                 </div>
                 )
+            }
+            else 
+            return (
+                null
+            )
             })
         ):
         (       
@@ -65,7 +71,8 @@ class Notes extends React.Component {
 
 const mapStateToProps = (state) => {
     return{
-        note: state.firestore.ordered.notes
+        note: state.firestore.ordered.notes,
+        auth: state.firebase.auth
     }
     
 }

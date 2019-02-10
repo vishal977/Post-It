@@ -1,14 +1,14 @@
 export const noteMaker = (note) => {
     return(dispatch,getState,{getFirebase,getFirestore}) => {
-        //Async Task
         const firestore = getFirestore();
         firestore.collection('notes').add({
             title: note.title,
-            body: note.body
-        }).then(() => {  //then block is executed after async task completes
+            body: note.body,
+            email: note.email
+        }).then(() => {
         dispatch({type: 'ADD_NOTE', note: note});
 
-        }).catch((err)=> { //Error Message
+        }).catch((err)=> {
             dispatch({type: 'ERROR_ADDING_NOTE', err})
         })
 

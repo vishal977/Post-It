@@ -5,13 +5,16 @@ import {noteMaker} from '../Redux/noteMaker.js';
 
 class AddNotes extends Component {
     state = {
-           title: '', body: ''
+           title: '', body: '', email: ''
             
     }
 
+
     changed = (e) => {
+        const {auth} = this.props
         this.setState({
-        [e.target.id]: [e.target.value]
+        [e.target.id]: e.target.value,
+        email: auth.email
         })
     }
 
@@ -22,10 +25,14 @@ class AddNotes extends Component {
         document.getElementById("body").value = "";
     }
 
+    
+
     render() {
+       const {auth} = this.props;
       return (
         <div className="addnotesContainer">
             <h4 className="grey-text center">Add Notes</h4>
+            
             <form onSubmit={this.submitted} className="addnotesForm">
                 <div className="input-field">
                     <i className="material-icons prefix grey-text text-darken-3">title</i>
@@ -37,9 +44,13 @@ class AddNotes extends Component {
                     <textarea id="body" className="materialize-textarea" onChange={this.changed} value = {this.state.body}></textarea>
                     <label htmlFor="body">Content</label>
                 </div>
+                <div className="grey-text center">
+                    <p>Posting as {auth.email}</p>
+                </div> 
                 <div className="input-field center">
                     <button className="btn grey darken-3">Add!</button>
                 </div>
+               
             </form>
         </div>
       )
@@ -50,8 +61,15 @@ class AddNotes extends Component {
 
 const mapDispatchToProps=(dispatch) => {
     return {
-        addNote : (note) => { dispatch(noteMaker(note))}
+        addNote : (note) => { dispatch(noteMaker(note))},
+        
     }
 }
 
-export default connect(null,mapDispatchToProps)(AddNotes);
+const mapStateToProps = (state) => {
+    return {
+        auth: state.firebase.auth
+    }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(AddNotes);
